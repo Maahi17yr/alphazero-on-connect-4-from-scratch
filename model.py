@@ -23,8 +23,19 @@ def make_empty_board() -> np.ndarray:
     """
     return np.zeros((ROWS, COLS), dtype=int)
 
-# Step 2 - column_top_row (not yet solved)
-# TODO: implement
+# Step 2 - column_top_row
+import numpy as np
+
+
+def column_top_row(board: np.ndarray, column: int) -> int:
+    """Return the row index where a piece dropped in `column` would land.
+
+    Row 0 is the top and row 5 is the bottom, so gravity pulls pieces toward
+    higher row indices. The result is the largest row index in the column that
+    still holds a 0, or -1 if the column is full.
+    """
+    empty_rows = np.flatnonzero(board[:, column] == 0)
+    return int(empty_rows[-1]) if empty_rows.size else -1
 
 # Step 3 - drop_piece (not yet solved)
 # TODO: implement
