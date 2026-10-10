@@ -59,8 +59,10 @@ def column_full(board: np.ndarray, column: int) -> bool:
     """Return True if `column` has no empty rows left."""
     return column_top_row(board, column) == -1
 
-# Step 5 - valid_moves (not yet solved)
-# TODO: implement
+# Step 5 - valid_moves
+def valid_moves(board: np.ndarray) -> list[int]:
+    """Return the column indices that can still accept a piece, left to right."""
+    return [col for col in range(board.shape[1]) if not column_full(board, col)]
 
 # Step 6 - four_in_a_row_horizontal (not yet solved)
 # TODO: implement
