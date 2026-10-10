@@ -98,8 +98,23 @@ def four_in_a_row_vertical(board: np.ndarray) -> int:
                 return int(cell)
     return 0
 
-# Step 8 - four_in_a_row_diagonal_down_right (not yet solved)
-# TODO: implement
+# Step 8 - four_in_a_row_diagonal_down_right
+def four_in_a_row_diagonal_down_right(board: np.ndarray) -> int:
+    """Return the player (1 or 2) with four in a row on a down-right diagonal, else 0.
+
+    A down-right diagonal runs from upper-left to lower-right, so each step
+    increases both the row and the column by one. The first line found
+    (topmost starting row, then leftmost starting column) is returned.
+    """
+    rows, cols = board.shape
+    for r in range(rows - 3):
+        for c in range(cols - 3):
+            cell = board[r, c]
+            if cell != 0 and (
+                cell == board[r + 1, c + 1] == board[r + 2, c + 2] == board[r + 3, c + 3]
+            ):
+                return int(cell)
+    return 0
 
 # Step 9 - four_in_a_row_diagonal_up_right (not yet solved)
 # TODO: implement
