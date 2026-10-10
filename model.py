@@ -37,8 +37,22 @@ def column_top_row(board: np.ndarray, column: int) -> int:
     empty_rows = np.flatnonzero(board[:, column] == 0)
     return int(empty_rows[-1]) if empty_rows.size else -1
 
-# Step 3 - drop_piece (not yet solved)
-# TODO: implement
+# Step 3 - drop_piece
+import numpy as np
+
+
+def drop_piece(board: np.ndarray, column: int, player: int) -> np.ndarray:
+    """Return a new board with `player`'s piece dropped into `column`.
+
+    The input board is left unchanged. Raises ValueError if the column is full.
+    """
+    row = column_top_row(board, column)
+    if row == -1:
+        raise ValueError(f"Column {column} is full")
+
+    new_board = board.copy()
+    new_board[row, column] = player
+    return new_board
 
 # Step 4 - column_full (not yet solved)
 # TODO: implement
