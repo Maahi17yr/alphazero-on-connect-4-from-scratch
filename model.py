@@ -116,8 +116,24 @@ def four_in_a_row_diagonal_down_right(board: np.ndarray) -> int:
                 return int(cell)
     return 0
 
-# Step 9 - four_in_a_row_diagonal_up_right (not yet solved)
-# TODO: implement
+# Step 9 - four_in_a_row_diagonal_up_right
+def four_in_a_row_diagonal_up_right(board: np.ndarray) -> int:
+    """Return the player (1 or 2) with four in a row on an up-right diagonal, else 0.
+
+    An up-right diagonal moves up one row (row index - 1) and right one
+    column (column index + 1) per step. Each window starts at its bottom-left
+    cell, so the start row must be at least 3. The first line found
+    (topmost starting row, then leftmost starting column) is returned.
+    """
+    rows, cols = board.shape
+    for r in range(3, rows):
+        for c in range(cols - 3):
+            cell = board[r, c]
+            if cell != 0 and (
+                cell == board[r - 1, c + 1] == board[r - 2, c + 2] == board[r - 3, c + 3]
+            ):
+                return int(cell)
+    return 0
 
 # Step 10 - check_winner (not yet solved)
 # TODO: implement
