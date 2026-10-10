@@ -81,8 +81,22 @@ def four_in_a_row_horizontal(board: np.ndarray) -> int:
                 return int(cell)
     return 0
 
-# Step 7 - four_in_a_row_vertical (not yet solved)
-# TODO: implement
+# Step 7 - four_in_a_row_vertical
+def four_in_a_row_vertical(board: np.ndarray) -> int:
+    """Return the player (1 or 2) with four in a row vertically, else 0.
+
+    Scans each column top to bottom. If several verticals exist, the first
+    one found (leftmost column, then topmost window) is returned.
+    """
+    rows, cols = board.shape
+    for c in range(cols):
+        for r in range(rows - 3):
+            cell = board[r, c]
+            if cell != 0 and (
+                cell == board[r + 1, c] == board[r + 2, c] == board[r + 3, c]
+            ):
+                return int(cell)
+    return 0
 
 # Step 8 - four_in_a_row_diagonal_down_right (not yet solved)
 # TODO: implement
