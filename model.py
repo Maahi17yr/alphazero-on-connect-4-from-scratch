@@ -54,8 +54,10 @@ def drop_piece(board: np.ndarray, column: int, player: int) -> np.ndarray:
     new_board[row, column] = player
     return new_board
 
-# Step 4 - column_full (not yet solved)
-# TODO: implement
+# Step 4 - column_full
+def column_full(board: np.ndarray, column: int) -> bool:
+    """Return True if `column` has no empty rows left."""
+    return column_top_row(board, column) == -1
 
 # Step 5 - valid_moves (not yet solved)
 # TODO: implement
