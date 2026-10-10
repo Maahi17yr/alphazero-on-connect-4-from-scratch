@@ -64,8 +64,22 @@ def valid_moves(board: np.ndarray) -> list[int]:
     """Return the column indices that can still accept a piece, left to right."""
     return [col for col in range(board.shape[1]) if not column_full(board, col)]
 
-# Step 6 - four_in_a_row_horizontal (not yet solved)
-# TODO: implement
+# Step 6 - four_in_a_row_horizontal
+def four_in_a_row_horizontal(board: np.ndarray) -> int:
+    """Return the player (1 or 2) with four in a row horizontally, else 0.
+
+    Scans each row left to right. If both players somehow have a line,
+    the first one found (top row first, then leftmost) is returned.
+    """
+    rows, cols = board.shape
+    for r in range(rows):
+        for c in range(cols - 3):
+            cell = board[r, c]
+            if cell != 0 and (
+                cell == board[r, c + 1] == board[r, c + 2] == board[r, c + 3]
+            ):
+                return int(cell)
+    return 0
 
 # Step 7 - four_in_a_row_vertical (not yet solved)
 # TODO: implement
