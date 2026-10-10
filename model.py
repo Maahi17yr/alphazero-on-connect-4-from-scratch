@@ -135,8 +135,23 @@ def four_in_a_row_diagonal_up_right(board: np.ndarray) -> int:
                 return int(cell)
     return 0
 
-# Step 10 - check_winner (not yet solved)
-# TODO: implement
+# Step 10 - check_winner
+def check_winner(board: np.ndarray) -> int:
+    """Return the player (1 or 2) with four in a row in any direction, else 0.
+
+    Checks horizontal, vertical, down-right diagonal, and up-right diagonal
+    in that order and returns the first non-zero result.
+    """
+    for check in (
+        four_in_a_row_horizontal,
+        four_in_a_row_vertical,
+        four_in_a_row_diagonal_down_right,
+        four_in_a_row_diagonal_up_right,
+    ):
+        winner = check(board)
+        if winner:
+            return winner
+    return 0
 
 # Step 11 - board_is_full (not yet solved)
 # TODO: implement
