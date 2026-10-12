@@ -217,8 +217,25 @@ def board_to_torch_tensor(board: np.ndarray, current_player: int) -> torch.Tenso
     encoded = encode_board(board, current_player)        # (2, 6, 7) float32
     return torch.from_numpy(encoded).unsqueeze(0)        # add batch dimension
 
-# Step 17 - init_conv_backbone (not yet solved)
-# TODO: implement
+# Step 17 - init_conv_backbone
+import torch.nn as nn
+
+
+def init_conv_backbone(in_channels: int = 2, hidden_channels: int = 16) -> nn.Module:
+    """Build the shared convolutional trunk of the policy-value network.
+
+    Input:  (B, in_channels, 6, 7)
+    Output: (B, hidden_channels, 6, 7)
+
+    Two 3x3 convolutions with padding=1 keep the 6x7 spatial size, and each
+    is followed by a ReLU (including the last one).
+    """
+    return nn.Sequential(
+        nn.Conv2d(in_channels, hidden_channels, kernel_size=3, padding=1),
+        nn.ReLU(),
+        nn.Conv2d(hidden_channels, hidden_channels, kernel_size=3, padding=1),
+        nn.ReLU(),
+    )
 
 # Step 18 - init_policy_head (not yet solved)
 # TODO: implement
