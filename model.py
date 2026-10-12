@@ -268,8 +268,31 @@ def init_value_head(hidden_channels: int = 16) -> nn.Module:
         nn.Tanh(),                                      # squash to (-1, 1)
     )
 
-# Step 20 - build_policy_value_net (not yet solved)
-# TODO: implement
+# Step 20 - build_policy_value_net
+class PolicyValueNet(nn.Module):
+    """AlphaZero-style policy-value network for Connect-4.
+
+    forward: (B, in_channels, 6, 7) -> (logits (B, num_columns), value (B, 1))
+    """
+
+    def __init__(self, in_channels: int = 2, hidden_channels: int = 64, num_columns: int = 7):
+        super().__init__()
+        self.backbone = init_conv_backbone(in_channels, hidden_channels)
+        self.policy_head = init_policy_head(hidden_channels, num_columns)
+        self.value_head = init_value_head(hidden_channels)
+
+    def forward(self, x: torch.Tensor):
+        features = self.backbone(x)                  # (B, hidden_channels, 6, 7)
+        logits = self.policy_head(features)          # (B, num_columns)
+        value = self.value_head(features)            # (B, 1)
+        return logits, value
+
+
+def build_policy_value_net(
+    in_channels: int = 2, hidden_channels: int = 64, num_columns: int = 7
+) -> nn.Module:
+    """Build the full policy-value network."""
+    return PolicyValueNet(in_channels, hidden_channels, num_columns)
 
 # Step 21 - policy_value_forward (not yet solved)
 # TODO: implement
