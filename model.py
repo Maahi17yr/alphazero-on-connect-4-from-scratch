@@ -294,8 +294,16 @@ def build_policy_value_net(
     """Build the full policy-value network."""
     return PolicyValueNet(in_channels, hidden_channels, num_columns)
 
-# Step 21 - policy_value_forward (not yet solved)
-# TODO: implement
+# Step 21 - policy_value_forward
+def policy_value_forward(net: nn.Module, encoded_board: torch.Tensor):
+    """Run a batch through the policy-value network.
+
+    Input:  encoded_board of shape (B, 2, 6, 7)
+    Output: (logits (B, 7), value (B, 1))
+
+    The network and the input tensor are not modified.
+    """
+    return net(encoded_board)
 
 # Step 22 - action_mask (not yet solved)
 # TODO: implement
