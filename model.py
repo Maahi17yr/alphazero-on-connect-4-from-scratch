@@ -208,8 +208,14 @@ def encode_board(board: np.ndarray, current_player: int) -> np.ndarray:
         [board == current_player, board == opponent]
     ).astype(np.float32)
 
-# Step 16 - board_to_torch_tensor (not yet solved)
-# TODO: implement
+# Step 16 - board_to_torch_tensor
+import torch
+
+
+def board_to_torch_tensor(board: np.ndarray, current_player: int) -> torch.Tensor:
+    """Encode the board and return a float32 tensor of shape (1, 2, 6, 7)."""
+    encoded = encode_board(board, current_player)        # (2, 6, 7) float32
+    return torch.from_numpy(encoded).unsqueeze(0)        # add batch dimension
 
 # Step 17 - init_conv_backbone (not yet solved)
 # TODO: implement
