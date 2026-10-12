@@ -289,7 +289,7 @@ class PolicyValueNet(nn.Module):
 
 
 def build_policy_value_net(
-    in_channels: int = 2, hidden_channels: int = 64, num_columns: int = 7
+    in_channels: int = 2, hidden_channels: int = 16, num_columns: int = 7
 ) -> nn.Module:
     """Build the full policy-value network."""
     return PolicyValueNet(in_channels, hidden_channels, num_columns)
