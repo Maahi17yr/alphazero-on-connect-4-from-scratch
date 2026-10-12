@@ -162,8 +162,17 @@ def check_winner(board: np.ndarray) -> int:
 def board_is_full(board):
     return bool(len(valid_moves(board)) == 0)
 
-# Step 12 - is_terminal (not yet solved)
-# TODO: implement
+# Step 12 - is_terminal
+def is_terminal(board: np.ndarray) -> tuple[bool, int]:
+    """Return (done, winner) for the given board.
+
+    winner is 1 or 2 if that player has four in a row, else 0.
+    done is True if someone has won or the board is full (a draw).
+    """
+    winner = check_winner(board)
+    if winner:
+        return True, int(winner)
+    return board_is_full(board), 0
 
 # Step 13 - other_player (not yet solved)
 # TODO: implement
