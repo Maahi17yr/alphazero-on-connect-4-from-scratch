@@ -179,8 +179,20 @@ def other_player(player: int) -> int:
     """Return the opponent's player code: 1 -> 2 and 2 -> 1."""
     return 3 - player
 
-# Step 14 - step_env (not yet solved)
-# TODO: implement
+# Step 14 - step_env
+def step_env(board: np.ndarray, column: int, player: int):
+    """Perform one Connect-4 transition.
+
+    Returns (new_board, done, winner, next_player):
+      new_board    - a new board with `player`'s piece dropped in `column`
+      done         - True if someone won or the board is now full
+      winner       - 1 or 2 if that player has four in a row, else 0
+      next_player  - the opponent of `player`
+    Raises ValueError if the column is full.
+    """
+    new_board = drop_piece(board, column, player)
+    done, winner = is_terminal(new_board)
+    return new_board, done, winner, other_player(player)
 
 # Step 15 - encode_board (not yet solved)
 # TODO: implement
