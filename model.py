@@ -194,8 +194,19 @@ def step_env(board: np.ndarray, column: int, player: int):
     done, winner = is_terminal(new_board)
     return new_board, done, winner, other_player(player)
 
-# Step 15 - encode_board (not yet solved)
-# TODO: implement
+# Step 15 - encode_board
+def encode_board(board: np.ndarray, current_player: int) -> np.ndarray:
+    """Encode the board from `current_player`'s point of view.
+
+    Returns a float32 array of shape (2, 6, 7):
+      channel 0 -> 1.0 where current_player has a piece
+      channel 1 -> 1.0 where the opponent has a piece
+    Empty cells are 0.0 in both channels.
+    """
+    opponent = other_player(current_player)
+    return np.stack(
+        [board == current_player, board == opponent]
+    ).astype(np.float32)
 
 # Step 16 - board_to_torch_tensor (not yet solved)
 # TODO: implement
