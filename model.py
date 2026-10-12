@@ -251,8 +251,22 @@ def init_policy_head(hidden_channels: int = 16, num_columns: int = 7) -> nn.Modu
         nn.Linear(2 * 6 * 7, num_columns),              # (B, num_columns)
     )
 
-# Step 19 - init_value_head (not yet solved)
-# TODO: implement
+# Step 19 - init_value_head
+def init_value_head(hidden_channels: int = 16) -> nn.Module:
+    """Build the value head of the policy-value network.
+
+    Input:  (B, hidden_channels, 6, 7) backbone features
+    Output: (B, 1) scalar value per board, in (-1, 1) via tanh
+    """
+    return nn.Sequential(
+        nn.Conv2d(hidden_channels, 1, kernel_size=1),   # (B, 1, 6, 7)
+        nn.ReLU(),
+        nn.Flatten(),                                   # (B, 42)
+        nn.Linear(6 * 7, 32),                           # (B, 32)
+        nn.ReLU(),
+        nn.Linear(32, 1),                               # (B, 1)
+        nn.Tanh(),                                      # squash to (-1, 1)
+    )
 
 # Step 20 - build_policy_value_net (not yet solved)
 # TODO: implement
