@@ -55,9 +55,14 @@ def drop_piece(board: np.ndarray, column: int, player: int) -> np.ndarray:
     return new_board
 
 # Step 4 - column_full
+# ── Step 004  column_full ──
 def column_full(board: np.ndarray, column: int) -> bool:
-    """Return True if `column` has no empty rows left."""
-    return column_top_row(board, column) == -1
+    """Return True if `column` cannot accept another piece.
+
+    Only the top row decides playability: if board[0, column] is occupied,
+    the column is full even if a lower cell is empty.
+    """
+    return bool(board[0, column] != 0)
 
 # Step 5 - valid_moves
 def valid_moves(board: np.ndarray) -> list[int]:
@@ -153,8 +158,9 @@ def check_winner(board: np.ndarray) -> int:
             return winner
     return 0
 
-# Step 11 - board_is_full (not yet solved)
-# TODO: implement
+# Step 11 - board_is_full
+def board_is_full(board):
+    return bool(len(valid_moves(board)) == 0)
 
 # Step 12 - is_terminal (not yet solved)
 # TODO: implement
