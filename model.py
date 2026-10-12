@@ -237,8 +237,19 @@ def init_conv_backbone(in_channels: int = 2, hidden_channels: int = 16) -> nn.Mo
         nn.ReLU(),
     )
 
-# Step 18 - init_policy_head (not yet solved)
-# TODO: implement
+# Step 18 - init_policy_head
+def init_policy_head(hidden_channels: int = 16, num_columns: int = 7) -> nn.Module:
+    """Build the policy head of the policy-value network.
+
+    Input:  (B, hidden_channels, 6, 7) backbone features
+    Output: (B, num_columns) raw logits, one per board column (no softmax)
+    """
+    return nn.Sequential(
+        nn.Conv2d(hidden_channels, 2, kernel_size=1),   # (B, 2, 6, 7)
+        nn.ReLU(),
+        nn.Flatten(),                                   # (B, 2 * 6 * 7) = (B, 84)
+        nn.Linear(2 * 6 * 7, num_columns),              # (B, num_columns)
+    )
 
 # Step 19 - init_value_head (not yet solved)
 # TODO: implement
